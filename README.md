@@ -48,6 +48,8 @@ Página Sobre: Visite a página "Sobre" para mais informações sobre o projeto.
 
 Este projeto faz uso da API do The Movie Database (TMDb) para buscar dados sobre filmes e séries. Para acessar a API, você precisa de uma chave de API, que deve ser inserida nos URLs das chamadas na app.py, se caso no momento que voce estiver vendo esse site e o link abaixo não estiver mais no ar com o site ativo você deve adiquirir sua propria chave.
 
+https://tmdb-explorer-aplica-o-flask-para-filmes.onrender.com/
+
 
 ## Contato
 
