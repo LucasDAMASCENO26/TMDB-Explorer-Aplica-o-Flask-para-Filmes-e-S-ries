@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2 class="text-center">Filmes Populares</h2>
+<hr>
+<div id="carouselFilmes" class="carousel slide" data-bs-ride="carousel" style="max-width: 800px; margin: auto;">
+  <div class="carousel-inner">
+    {% for i in range(top_filmes|length) %}
+      <div class="carousel-item {% if i == 0 %}active{% endif %}">
+        <div class="d-flex justify-content-center">
+          <div class="card zoom-card" style="width: 300px;">
+            <div class="zoom-content">
+              <img src="https://image.tmdb.org/t/p/w500{{ top_filmes[i]['backdrop_path'] }}" class="card-img-top zoom-img" alt="{{ top_filmes[i]['title'] }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ top_filmes[i]['title'] }}</h5>
+                <p class="card-text">{{ top_filmes[i]['overview'][:100] }}...</p>
+                <p class="card-text">
+                  <strong>Avaliação:</strong>
+                  {% set rating = top_filmes[i]['vote_average'] / 2 %}
+                  {% for star in range(5) %}
+                    <i class="fa {% if star < rating|int %}fa-star{% else %}fa-star-o{% endif %} rating"></i>
+                  {% endfor %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilmes" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselFilmes" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Próximo</span>
+  </button>
+</div>
+
+<h2 class="text-center mt-5">Séries Populares</h2>
+<hr>
+<div id="carouselSeries" class="carousel slide" data-bs-ride="carousel" style="max-width: 800px; margin: auto;">
+  <div class="carousel-inner">
+    {% for i in range(top_series|length) %}
+      <div class="carousel-item {% if i == 0 %}active{% endif %}">
+        <div class="d-flex justify-content-center">
+          <div class="card zoom-card" style="width: 300px;">
+            <div class="zoom-content">
+              <img src="https://image.tmdb.org/t/p/w500{{ top_series[i]['backdrop_path'] }}" class="card-img-top zoom-img" alt="{{ top_series[i]['name'] }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ top_series[i]['name'] }}</h5>
+                <p class="card-text">{{ top_series[i]['overview'][:100] }}...</p>
+                <p class="card-text">
+                  <strong>Avaliação:</strong>
+                  {% set rating = top_series[i]['vote_average'] / 2 %}
+                  {% for star in range(5) %}
+                    <i class="fa {% if star < rating|int %}fa-star{% else %}fa-star-o{% endif %} rating"></i>
+                  {% endfor %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselSeries" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselSeries" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Próximo</span>
+  </button>
+</div>
+{% endblock %}

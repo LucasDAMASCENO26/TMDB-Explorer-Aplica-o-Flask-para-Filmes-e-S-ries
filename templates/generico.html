@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="http://image.tmdb.org/t/p/w500{{ detalhes.poster_path }}" class="img-fluid" alt="Imagem de {{ detalhes.title or detalhes.name }}">
+        </div>
+        <div class="col-md-8">
+            <h2>{{ detalhes.title or detalhes.name }}</h2>
+            <p><strong>Descrição:</strong> {{ detalhes.overview }}</p>
+            <p><strong>Gênero:</strong> 
+                {% for genero in detalhes.genres %}
+                    {{ genero.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            {% if tipo == 'filme' %}
+                <p><strong>Tempo de Duração:</strong> {{ detalhes.runtime }} minutos</p>
+            {% elif tipo == 'serie' %}
+                <p><strong>Temporadas:</strong> {{ detalhes.number_of_seasons }}</p>
+            {% endif %}
+            <p><strong>Plataformas Disponíveis:</strong>
+                {% for plataforma in detalhes.networks %}
+                    {{ plataforma.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Atores:</strong>
+                {% for ator in detalhes.credits.cast[:5] %}
+                    {{ ator.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+
+            <!-- Adição do link para o trailer com badge -->
+            {% if trailer_url %}
+                <p><strong>Trailer:</strong> 
+                    <a href="{{ trailer_url }}" target="_blank">
+                        <img src="https://img.shields.io/badge/Watch%20Trailer-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+                    </a>
+                </p>
+            {% else %}
+                <p><strong>Trailer:</strong> Não disponível</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock conteudo %}
